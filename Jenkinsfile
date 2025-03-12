@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     dir("ci-cd-terraform-jenkins-aws") {
-                        git branch: 'main', credentialsId: 'Github-PAT', url: 'https://github.com/AkhileshGurmit/Terraform_EC2_s3.git'
+                        git branch: 'main', credentialsId: 'Github-PAT', url: 'https://github.com/AkhileshGurmit/ci-cd-terraform-jenkins-aws.git'
                     }
                 }
             }

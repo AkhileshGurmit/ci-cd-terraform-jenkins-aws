@@ -1,0 +1,178 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akhilesh Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #391277;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: #2c235f;
+            color: rgb(171, 194, 187);
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff9800;
+        }
+
+        /* Adjusted section styles to remove extra space and fix overlapping */
+        section {
+            padding: 80px 20px;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        /* Ensure the first section starts below the fixed header */
+        section:first-of-type {
+            padding-top: 120px;
+        }
+
+        .project-card, .review {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .project-card:hover, .review:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section h2 {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .project-card {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s ease-in-out;
+        }
+
+        .slide-in.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Akhilesh</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="about" class="slide-in">
+        <h2>About Me</h2>
+        <p>
+            Hi, I'm Akhilesh, a passionate DevOps enthusiast dedicated to bridging the gap between development and operations. 
+            I specialize in cloud computing, CI/CD pipelines, automation, and infrastructure as code (IaC). 
+            My goal is to create scalable, secure, and efficient workflows that streamline deployments and optimize system performance. 
+            Let's build something amazing together!
+        </p>
+    </section>
+    
+    <section id="projects" class="slide-in">
+        <h2>Projects</h2>
+        <div class="project-card">
+            <h3>Project 1</h3>
+            <p>Hosted a Static Website on S3 with Terraform.</p>
+        </div>
+        <div class="project-card">
+            <h3>Project 2</h3>
+            <p>Deploy an EC2 Instance with Terraform.</p>
+        </div>
+    </section>
+    
+    <section id="reviews" class="slide-in">
+        <h2>Reviews</h2>
+        <div class="review">
+            <p>"Akhilesh is an amazing developer! Highly recommended!" - Client A</p>
+        </div>
+        <div class="review">
+            <p>"Excellent work, delivered on time." - Client B</p>
+        </div>
+    </section>
+    
+    <section id="contact" class="slide-in">
+        <h2>Contact</h2>
+        <p>Email: akhileshgurmitkal@gmail.com</p>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll("section");
+
+            function revealOnScroll() {
+                sections.forEach((section) => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const triggerPoint = window.innerHeight - 100;
+
+                    if (sectionTop < triggerPoint) {
+                        section.classList.add("visible");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll(); // Trigger on load
+        });
+    </script>
+</body>
+</html>

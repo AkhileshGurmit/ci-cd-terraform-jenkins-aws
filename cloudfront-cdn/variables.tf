@@ -1,5 +1,4 @@
 
-
 variable "acm_certificate_arn" {
   description = "The ARN of the ACM certificate for CloudFront (if not using the default certificate)"
   type        = string
@@ -15,3 +14,5 @@ variable "s3_origin_id" {
   description = "Origin ID for CloudFront"
   type        = string
 }
+
+

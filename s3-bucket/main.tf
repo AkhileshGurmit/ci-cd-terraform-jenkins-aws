@@ -2,40 +2,30 @@ resource "aws_s3_bucket" "example" {
   bucket = var.bucket_name
 }
 
-# 🔹 Restricting Direct Public Access
 resource "aws_s3_bucket_public_access_block" "public_access" {
   bucket = aws_s3_bucket.example.id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = true   # Prevents public ACLs
+  block_public_policy     = true   # Prevents bucket-wide public policies
+  ignore_public_acls      = true   # Ignores any public ACLs applied
+  restrict_public_buckets = true   # Blocks public access completely
 }
+
 
 # 🔹 CloudFront Origin Access Identity (OAI)
 resource "aws_cloudfront_origin_access_identity" "oai" {
   comment = "OAI for CloudFront to access S3"
 }
 
-# 🔹 Setting Bucket Policy to Allow Only CloudFront OAI
 resource "aws_s3_bucket_policy" "public_read" {
   bucket = aws_s3_bucket.example.id
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "AllowCloudFrontAccess"
-        Effect    = "Allow"
-        Principal = {
-          AWS = aws_cloudfront_origin_access_identity.oai.iam_arn
-        }
-        Action    = "s3:GetObject"
-        Resource  = "arn:aws:s3:::${aws_s3_bucket.example.bucket}/*"
-      }
-    ]
+  policy = templatefile("${path.module}/s3_policy.json.tpl", {
+    oai_arn     = var.oai_arn   # ✅ Use the correct variable
+    bucket_name = aws_s3_bucket.example.bucket  # ✅ Fix the reference
   })
 }
+
 
 # 🔹 Upload the Index.html File
 resource "aws_s3_object" "index" {
@@ -44,3 +34,4 @@ resource "aws_s3_object" "index" {
   source      = "${path.module}/index.html"
   content_type = "text/html"
 }
+

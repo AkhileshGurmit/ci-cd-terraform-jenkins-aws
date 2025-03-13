@@ -27,3 +27,9 @@ variable "acm_certificate_arn" {
   type        = string
   default     = ""  # Leave empty to use CloudFront default certificate
 }
+
+variable "oai_arn" {
+  description = "The ARN of the CloudFront Origin Access Identity"
+  type        = string
+  default=""
+}

@@ -4,3 +4,7 @@ variable "bucket_name"{
     default="my-terraform-s3-bucket-crazy-india-12345"
 }
 
+variable "oai_arn" {
+  description = "The ARN of the CloudFront Origin Access Identity"
+  type        = string
+}

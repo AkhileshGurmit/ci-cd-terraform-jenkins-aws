@@ -16,3 +16,11 @@ output "bucket_id" {
   description = "The ID of the S3 bucket"
   value       = aws_s3_bucket.example.id
 }
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.example.bucket
+}
+
+output "cloudfront_oai_arn" {
+  value = aws_cloudfront_origin_access_identity.oai.iam_arn
+}
